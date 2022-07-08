@@ -38,15 +38,15 @@ module.exports.getAccessToken = async (accessToken) => {
         .populate('user')
         .populate('client');
 
-    if (!_accessToken) {
-        return false;
-    }
+    // if (_accessToken.toString()==="") {
+    //     return false;
+    // }
 
-    _accessToken = _accessToken.toObject();
+    // _accessToken = _accessToken.toObject();
 
-    if (!_accessToken.user) {
-        _accessToken.user = {};
-    }
+    // if (!_accessToken.user.toString()==="") {
+    //     _accessToken.user = {};
+    // }
     return _accessToken;
 };
 

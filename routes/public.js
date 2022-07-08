@@ -54,7 +54,8 @@ router.post('/register', async (req, res, next) => {
             clientSecret: req.body.clientSecret,
             redirectUris: req.body.redirectUris.split(','),
             grants: ['authorization_code', 'client_credentials',
-                'refresh_token', 'password']
+                'refresh_token', 'password'],
+             //   grants: ['authorization_code']
         });
         _client.save();
     }

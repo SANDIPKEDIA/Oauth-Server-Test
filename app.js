@@ -50,6 +50,8 @@ db.once('open', console.log.bind(console, 'MongoDB connection successful'));
 require('./models/user');
 require('./models/oauth');
 
+
+
 // Routes
 app.use(require('./routes'));
 
@@ -57,6 +59,9 @@ app.use(require('./routes'));
 app.use(function (req, res, next) {
     next(createError(404));
 });
+
+
+
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -68,5 +73,8 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+
+
 
 module.exports = app;

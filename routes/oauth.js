@@ -3,6 +3,8 @@ const OAuthServer = require('express-oauth-server');
 const OAuthModel = require('../models/oauth');
 const mongoose = require('mongoose');
 
+const {getAccessToken} = require("../models/oauth")
+
 let oauth = new OAuthServer({
     model: OAuthModel,
     debug: true
@@ -23,7 +25,7 @@ router.post('/oauth/authenticate', async (req, res, next) => {
 
     let UserModel = mongoose.model('User');
     req.body.user = await UserModel.findOne({ username: req.body.username });
-
+    console.log(req.body.user);
     return next();
 }, oauth.authorize({
     authenticateHandler: {
@@ -32,5 +34,15 @@ router.post('/oauth/authenticate', async (req, res, next) => {
         }
     }
 }));
+
+router.get('/oauth/get-user', async (req, res,next) => {
+    console.log("request---------------------------------------------->",req)
+    const accesstoken =req.query.access_token
+    console.log("accesstoken------------------->",accesstoken);
+  const user =  await getAccessToken(accesstoken)
+  res.send(user)
+//    return next();
+    
+});
 
 module.exports = router;
